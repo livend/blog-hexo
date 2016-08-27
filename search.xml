@@ -4,18 +4,6 @@
   
     
     <entry>
-      <title><![CDATA[CNAME]]></title>
-      <url>http://blog.liven.site/2016/08/27/CNAME-1/</url>
-      <content type="html"></content>
-    </entry>
-    
-    <entry>
-      <title><![CDATA[CNAME]]></title>
-      <url>http://blog.liven.site/2016/08/27/CNAME/</url>
-      <content type="html"></content>
-    </entry>
-    
-    <entry>
       <title><![CDATA[first]]></title>
       <url>http://blog.liven.site/2016/08/22/first/</url>
       <content type="html"><![CDATA[<p>这是liven的新博客，用hexo创建的第一篇博客文章</p>
