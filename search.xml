@@ -4,6 +4,59 @@
   
     
     <entry>
+      <title><![CDATA[ngrok服务器搭建]]></title>
+      <url>http://blog.liven.site/2016/08/27/ngrok%E6%9C%8D%E5%8A%A1%E5%99%A8%E6%90%AD%E5%BB%BA/</url>
+      <content type="html"><![CDATA[<h3 id="ngrok服务器搭建"><a href="#ngrok服务器搭建" class="headerlink" title="ngrok服务器搭建"></a>ngrok服务器搭建</h3><ul>
+<li>资源<br>  ngrok git网址：<a href="https://github.com/inconshreveable/ngrok" target="_blank" rel="external">https://github.com/inconshreveable/ngrok</a><br>  go语言安装:<a href="https://golang.org/dl/" target="_blank" rel="external">https://golang.org/dl/</a>  —要求能翻墙 我安装的go-1.4<br>  git的最新版本(最好git-2.x)</li>
+<li>我的安装环境<br>  centos6 x32位</li>
+<li><p>go安装<br>  go环境配置</p>
+<pre><code>在.bash_profile中
+    #go set
+export GOROOT=/usr/local/go
+export GOOS=linux
+export GOARCH=386
+export GOBIN=$GOROOT/bin
+
+PATH=$PATH:$GOBIN
+export PATH
+</code></pre><p>  — source .bash_profile 使配置生效</p>
+<p>  下载go1.4 到 /usr/local  解压 生成go目录   cd go/src   ./all.bash  完成安装<br>  go versin :　　go version go1.4.3 linux/386　　—一定要先安装好go语言</p>
+  <a id="more"></a>
+</li>
+<li><p>开始安装ngork<br>  生成自签名SSL证书:  www.liven.site为我的域名</p>
+<pre><code>$ cd ~/goproj/src/github.com/inconshreveable/ngrok
+</code></pre><p>  $ openssl genrsa -out rootCA.key 2048<br>  $ openssl req -x509 -new -nodes -key rootCA.key -subj “/CN=liven.site” -days 5000 -out rootCA.pem<br>  $ openssl genrsa -out device.key 2048<br>  $ openssl req -new -key device.key -subj “/CN=liven.site” -out device.csr<br>  $ openssl x509 -req -in device.csr -CA rootCA.pem -CAkey rootCA.key -CAcreateserial -out device.crt -days 5000</p>
+<pre><code>执行完以上命令，在ngrok目录下就会新生成6个文件：
+</code></pre><p>  -rw-rw-r– 1 ubuntu ubuntu 1001 Mar 14 02:22 device.crt<br>  -rw-rw-r– 1 ubuntu ubuntu  903 Mar 14 02:22 device.csr<br>  -rw-rw-r– 1 ubuntu ubuntu 1679 Mar 14 02:22 device.key<br>  -rw-rw-r– 1 ubuntu ubuntu 1679 Mar 14 02:21 rootCA.key<br>  -rw-rw-r– 1 ubuntu ubuntu 1119 Mar 14 02:21 rootCA.pem<br>  -rw-rw-r– 1 ubuntu ubuntu   17 Mar 14 02:22 rootCA.srl</p>
+<p>  生成服务器端程序：</p>
+<pre><code>cd ngrok    make release-server 
+</code></pre><p>  生成客户端程序：</p>
+<pre><code>make release-client     ----- ngrok将会出现在go的bin目录中  会生成linux客户端
+</code></pre><p>  生成windows客户端</p>
+<pre><code>cd go/src 
+</code></pre><p>  GOOS=windows GOARCH=386 ./make.bash     —会在go/pkg/tool/目录下生成windows_386文件夹</p>
+<pre><code>cd ngork
+</code></pre><p>  GOOS=windows GOARCH=386 make release-client    —-生成可执行文件 ngrok.exe   ngrok.exe将会出现在go的bin/window_386/目录中</p>
+</li>
+<li><p>可能出现的问题<br>  出错：<br>  GOOS=”” GOARCH=”” go get github.com/jteeuwen/go-bindata/go-bindata<br>  bin/go-bindata -nomemcopy -pkg=assets -tags=release \            -debug=false \<br>  -o=src/ngrok/client/assets/assets_release.go \<br>  assets/client/…<br>  make: bin/go-bindata: Command not found<br>  make: <em>*</em> [client-assets] Error 127</p>
+<p>  解决：在ngrok中(ngrok.git目录) mkdir bin<br>  $ cp /home/ubuntu/.bin/go14/bin/go-bindata ./bin</p>
+<p>  参考别人安装遇到的问题：<br>  <a href="http://tonybai.com/2015/03/14/selfhost-ngrok-service/" target="_blank" rel="external">http://tonybai.com/2015/03/14/selfhost-ngrok-service/</a><br>  <a href="http://www.haiyun.me/archives/1012.html" target="_blank" rel="external">http://www.haiyun.me/archives/1012.html</a><br>  <a href="http://www.svenbit.com/2014/09/run-ngrok-on-your-own-server/" target="_blank" rel="external">http://www.svenbit.com/2014/09/run-ngrok-on-your-own-server/</a><br>  <a href="https://github.com/inconshreveable/ngrok/blob/master/docs/SELFHOSTING.md" target="_blank" rel="external">https://github.com/inconshreveable/ngrok/blob/master/docs/SELFHOSTING.md</a><br>  <a href="http://www.cnblogs.com/pwenlee/p/5302880.html" target="_blank" rel="external">http://www.cnblogs.com/pwenlee/p/5302880.html</a></p>
+</li>
+<li><p>测试连接<br>  启动server端：</p>
+<pre><code>cd go 
+</code></pre><p>  ./bin/ngrokd  -domain=”liven.site” -httpAddr=”:80” -httpsAddr=”:8082” -tunnelAddr=”:4443”  </p>
+<p>  —启动成功如下：<br>  [19:25:46 EDT 2016/06/29] [INFO] (ngrok/log.(<em>PrefixLogger).Info:83) [registry] [tun] No affinity cache specified<br>  [19:25:46 EDT 2016/06/29] [INFO] (ngrok/log.(</em>PrefixLogger).Info:83) [metrics] Reporting every 30 seconds<br>  [19:25:47 EDT 2016/06/29] [INFO] (ngrok/log.Info:112) Listening for public http connections on [::]:80<br>  [19:25:47 EDT 2016/06/29] [INFO] (ngrok/log.Info:112) Listening for public https connections on [::]:8082<br>  [19:25:47 EDT 2016/06/29] [INFO] (ngrok/log.Info:112) Listening for control and proxy connections on [::]:4443</p>
+<p>  启动客户端：将ngrok.exe copy到本地windows pc</p>
+<pre><code>新建ngrok.cfg:
+</code></pre><p>  server_addr: “liven.site:4443”<br>  trust_host_root_certs: false<br>  启动： ngrok.exe -config ngrok.exe -subdomain ngrok 80<br>  —-说明  -subdomain 后面的值会为二级域名前缀  及  ngrok.liven.site必须要配置域名映射到服务器端ip  80表示跑在本地端口的web应用</p>
+</li>
+<li><p>end</p>
+</li>
+</ul>
+]]></content>
+    </entry>
+    
+    <entry>
       <title><![CDATA[first]]></title>
       <url>http://blog.liven.site/2016/08/22/first/</url>
       <content type="html"><![CDATA[<p>这是liven的新博客，用hexo创建的第一篇博客文章</p>

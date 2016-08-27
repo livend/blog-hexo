@@ -180,16 +180,6 @@
         </li>
       
         
-        <li class="menu-item menu-item-categories">
-          <a href="/categories" rel="section">
-            
-              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
-            
-            分类
-          </a>
-        </li>
-      
-        
         <li class="menu-item menu-item-about">
           <a href="/about" rel="section">
             
@@ -206,16 +196,6 @@
               <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
             
             归档
-          </a>
-        </li>
-      
-        
-        <li class="menu-item menu-item-tags">
-          <a href="/tags" rel="section">
-            
-              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
-            
-            标签
           </a>
         </li>
       
@@ -259,6 +239,142 @@
           <div id="content" class="content">
             
   <section id="posts" class="posts-expand">
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2016/08/27/ngrok服务器搭建/" itemprop="url">
+                  ngrok服务器搭建
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2016-08-27T17:16:45+08:00" content="2016-08-27">
+              2016-08-27
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/日志/" itemprop="url" rel="index">
+                    <span itemprop="name">日志</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2016/08/27/ngrok服务器搭建/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/08/27/ngrok服务器搭建/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <h3 id="ngrok服务器搭建"><a href="#ngrok服务器搭建" class="headerlink" title="ngrok服务器搭建"></a>ngrok服务器搭建</h3><ul>
+<li>资源<br>  ngrok git网址：<a href="https://github.com/inconshreveable/ngrok">https://github.com/inconshreveable/ngrok</a><br>  go语言安装:<a href="https://golang.org/dl/">https://golang.org/dl/</a>  —要求能翻墙 我安装的go-1.4<br>  git的最新版本(最好git-2.x)</li>
+<li>我的安装环境<br>  centos6 x32位</li>
+<li><p>go安装<br>  go环境配置</p>
+<pre><code>在.bash_profile中
+    #go set
+export GOROOT=/usr/local/go
+export GOOS=linux
+export GOARCH=386
+export GOBIN=$GOROOT/bin
+
+PATH=$PATH:$GOBIN
+export PATH
+</code></pre><p>  — source .bash_profile 使配置生效</p>
+<p>  下载go1.4 到 /usr/local  解压 生成go目录   cd go/src   ./all.bash  完成安装<br>  go versin :　　go version go1.4.3 linux/386　　—一定要先安装好go语言</p>
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2016/08/27/ngrok服务器搭建/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
     
       
 
@@ -534,26 +650,26 @@
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">2</span>
+              <span class="site-state-item-count">3</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
 
           
             <div class="site-state-item site-state-categories">
-              <a href="/categories">
+              
                 <span class="site-state-item-count">1</span>
                 <span class="site-state-item-name">分类</span>
-              </a>
+              
             </div>
           
 
           
             <div class="site-state-item site-state-tags">
-              <a href="/tags">
-                <span class="site-state-item-count">3</span>
+              
+                <span class="site-state-item-count">4</span>
                 <span class="site-state-item-name">标签</span>
-              </a>
+              
             </div>
           
 
